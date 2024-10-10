@@ -1,5 +1,3 @@
-'use client';
-
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 import MusicIcon from '../public/vinyl-record.png';
@@ -133,11 +131,11 @@ export default function MusicSlideIn({ onClose }) {
             <div className="absolute top-[-30px] left-1/2 transform -translate-x-1/2 mb-4">
               <Image src={MusicIcon} width={80} className="animate-spin" alt="Vinyl Record" /> {/* Classname for spinning effect */}
             </div>
-            <h2 className="text-lg font-semibold mb-2 mt-10">Happy Birthday!</h2>
-            <p className="text-gray-600 mb-4">Artist: Pamungkas</p>
+            <h2 className="mt-10 mb-2 text-lg font-semibold">Happy Birthday!</h2>
+            <p className="mb-4 text-gray-600">Artist: Pamungkas</p>
 
             {/* Scrollable Lyrics Section */}
-            <div className="text-center mb-4 overflow-y-auto max-h-48 w-full px-4" ref={lyricsRef} style={{ scrollBehavior: 'smooth' }}>
+            <div className="w-full px-4 mb-4 overflow-y-auto text-center max-h-48" ref={lyricsRef} style={{ scrollBehavior: 'smooth' }}>
               {lyrics.map((lyric, index) => (
                 <p key={index} className={`text-gray-800 ${currentLyricIndex === index ? 'font-bold text-green-500' : ''}`}>
                   {lyric.text}
@@ -147,17 +145,17 @@ export default function MusicSlideIn({ onClose }) {
 
             {/* Audio Player */}
             <div className="flex flex-col items-center justify-center w-full mb-4">
-              <span className="text-gray-800 mb-2">{formatTime(currentTime)}</span>
+              <span className="mb-2 text-gray-800">{formatTime(currentTime)}</span>
 
               {/* Song Progress Slider */}
               <input type="range" min="0" max={duration} step="0.1" value={currentTime} onChange={handleSliderChange} className="w-full mb-2" />
 
-              <button onClick={togglePlay} className="bg-green-500 text-white p-2 rounded-full hover:scale-110 transition-transform">
+              <button onClick={togglePlay} className="p-2 text-white transition-transform bg-green-500 rounded-full hover:scale-110">
                 {isPlaying ? 'Pause' : 'Play'}
               </button>
             </div>
 
-            <button onClick={closeSlideIn} className="mt-4 bg-red-500 text-white py-2 px-4 rounded">
+            <button onClick={closeSlideIn} className="px-4 py-2 mt-4 text-white bg-red-500 rounded">
               Close
             </button>
           </div>
