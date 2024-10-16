@@ -9,7 +9,7 @@ const poppins = Poppins({
 
 export const metadata = {
   title: 'Dinda Ultah Coiii',
-  description: 'Bagi yang mau ngucapin selamat ulang tahun ke Dinda, bisa langsung ke sini ya!',
+  description: 'Gacorr bang',
 };
 
 export default function RootLayout({ children }) {
