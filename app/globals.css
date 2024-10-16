@@ -30,42 +30,37 @@ body {
 /* Add to your global CSS file if necessary */
 .transition-transform {
   transition: transform 300ms ease-in-out; /* Match this duration with your timing in JS */
-}
-
+} /* styles.css */
 @keyframes slideIn {
   from {
-    transform: translateX(100%);
+    transform: translateY(-100%);
     opacity: 0;
   }
   to {
-    transform: translateX(0);
+    transform: translateY(0);
     opacity: 1;
   }
 }
 
 @keyframes slideOut {
   from {
-    transform: translateX(0);
+    transform: translateY(0);
     opacity: 1;
   }
   to {
-    transform: translateX(100%);
+    transform: translateY(-100%);
     opacity: 0;
   }
 }
 
-.modal {
-  animation-duration: 0.5s;
-  animation-fill-mode: forwards; /* Maintain the final state of the animation */
-}
-
 .slide-in {
-  animation-name: slideIn;
+  animation: slideIn 0.5s forwards;
 }
 
 .slide-out {
-  animation-name: slideOut;
+  animation: slideOut 0.5s forwards;
 }
+
 @keyframes shake {
   0% {
     transform: translate(1px, 1px) rotate(0deg);
@@ -86,4 +81,80 @@ body {
 
 .animate-shake {
   animation: shake 0.5s ease-in-out;
+}
+
+/* Keyframes for fade-in animation */
+@keyframes text-animated__fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Animated Text Heading Style */
+.text-animated__heading {
+  font-size: 2.5rem; /* Larger font size for prominence */
+  font-weight: bold; /* Bold font */
+  text-align: center; /* Centered text */
+  color: #f6f6f6; /* Vivid pink color */
+  animation: text-animated__fadeIn 0.5s ease-out; /* Fade-in animation */
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3), /* Soft shadow for depth */ 0 2px 5px rgba(255, 64, 129, 0.3), /* Light pink shadow for warmth */ 0 4px 10px rgba(255, 64, 129, 0.1); /* Fainter pink shadow for subtle glow */
+}
+
+/* Animated Text Description Style */
+.text-animated__description {
+  font-size: 1.5rem; /* Larger font size for description */
+  text-align: center; /* Centered text */
+  color: #424242; /* Dark gray color for contrast */
+  margin-top: 1rem; /* Space above the description */
+  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.6), /* Light white shadow for readability */ 0 2px 5px rgba(0, 0, 0, 0.2); /* Soft black shadow for depth */
+}
+
+.falling-leaves {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 100%;
+  max-width: 880px;
+  max-height: 880px; /* image is only 880x880 */
+  transform: translate(-50%, 0);
+  border: 20px solid #fff;
+  border-radius: 50px;
+  background-size: cover;
+  overflow: hidden;
+  z-index: 1000;
+}
+
+.leaf-scene {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  transform-style: preserve-3d;
+}
+
+.leaf-scene div {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/125707/leaf.svg) no-repeat;
+  background-size: 100%;
+  transform-style: preserve-3d;
+  backface-visibility: visible;
+}
+
+.perspective {
+  perspective: 1000px; /* Mengatur perspektif untuk efek 3D */
+}
+
+.hover\:rotate-y-6:hover {
+  transform: rotateY(6deg); /* Efek rotasi saat hover */
 }

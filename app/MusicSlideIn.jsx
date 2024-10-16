@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
+import { FaPause, FaPlay } from 'react-icons/fa'; // Import the icons
 import MusicIcon from '../public/vinyl-record.png';
 
 export default function MusicSlideIn({ onClose }) {
@@ -150,8 +151,8 @@ export default function MusicSlideIn({ onClose }) {
               {/* Song Progress Slider */}
               <input type="range" min="0" max={duration} step="0.1" value={currentTime} onChange={handleSliderChange} className="w-full mb-2" />
 
-              <button onClick={togglePlay} className="p-2 text-white transition-transform bg-green-500 rounded-full hover:scale-110">
-                {isPlaying ? 'Pause' : 'Play'}
+              <button onClick={togglePlay} className={`p-2 text-white transition-transform rounded-full hover:scale-110 ${isPlaying ? 'bg-red-500' : 'bg-green-500'}`}>
+                {isPlaying ? <FaPause /> : <FaPlay />}
               </button>
             </div>
 
