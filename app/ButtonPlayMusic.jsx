@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { FaMusic, FaPause } from 'react-icons/fa';
-import FallingLeaves from './FallingLeaves';
+import AestheticParticles from './AestheticParticles';
 
 const ButtonPlayMusic = () => {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -8,7 +8,7 @@ const ButtonPlayMusic = () => {
 
   useEffect(() => {
     audioRef.current = new Audio('/backsound.mp3');
-    audioRef.current.loop = true; // Make the audio loop
+    audioRef.current.loop = true;
 
     return () => {
       audioRef.current.pause();
@@ -32,7 +32,7 @@ const ButtonPlayMusic = () => {
           {isPlaying ? <FaPause className="text-white" size={20} /> : <FaMusic className="text-white" size={20} />}
         </button>
       </div>
-      <FallingLeaves isPlaying={isPlaying} />
+      <AestheticParticles isPlaying={isPlaying} />
     </>
   );
 };

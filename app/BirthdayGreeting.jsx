@@ -45,7 +45,7 @@ const BirthdayGreeting = () => {
   return (
     <div
       ref={cardRef}
-      className="relative max-w-lg p-8 mx-4 mx-auto my-6 text-center transition-all duration-300 shadow-lg bg-gradient-to-br from-pink-500 to-purple-600 rounded-3xl hover:shadow-2xl sm:max-w-md md:max-w-lg lg:max-w-xl sm:mx-6 md:mx-8"
+      className="relative max-w-lg p-8 mx-8 mx-auto my-6 text-center transition-all duration-300 shadow-lg bg-gradient-to-br from-pink-500 to-purple-600 rounded-3xl hover:shadow-2xl sm:max-w-md md:max-w-lg lg:max-w-xl sm:mx-6 md:mx-8"
       style={{
         perspective: '1000px',
         transform: `rotateX(${tilt.x}deg) rotateY(${tilt.y}deg) scale(${isHovered ? 1.05 : 1})`,
