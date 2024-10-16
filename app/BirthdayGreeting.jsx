@@ -10,6 +10,8 @@ const BirthdayGreeting = () => {
     const card = cardRef.current;
     if (!card) return;
 
+    const isMobile = window.innerWidth <= 768;
+
     const handleMouseMove = (e) => {
       if (!isHovered) return;
 
@@ -20,8 +22,8 @@ const BirthdayGreeting = () => {
       const centerX = rect.width / 2;
       const centerY = rect.height / 2;
 
-      const tiltX = (y - centerY) / 10;
-      const tiltY = (centerX - x) / 10;
+      const tiltX = -(y - centerY) / 10; // Negative for natural tilt
+      const tiltY = (x - centerX) / 10; // Tilt left/right
 
       setTilt({ x: tiltX, y: tiltY });
 
@@ -31,8 +33,41 @@ const BirthdayGreeting = () => {
       setGlarePosition({ x: glareX, y: glareY });
     };
 
-    card.addEventListener('mousemove', handleMouseMove);
-    return () => card.removeEventListener('mousemove', handleMouseMove);
+    const handleTouchMove = (e) => {
+      if (!isHovered) return;
+
+      const rect = card.getBoundingClientRect();
+      const touch = e.touches[0];
+      const x = touch.clientX - rect.left;
+      const y = touch.clientY - rect.top;
+
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+
+      const tiltX = -(y - centerY) / 10; // Negative for natural tilt
+      const tiltY = (x - centerX) / 10; // Tilt left/right
+
+      setTilt({ x: tiltX, y: tiltY });
+
+      // Update glare position
+      const glareX = (x / rect.width) * 100;
+      const glareY = (y / rect.height) * 100;
+      setGlarePosition({ x: glareX, y: glareY });
+    };
+
+    if (isMobile) {
+      card.addEventListener('touchmove', handleTouchMove);
+    } else {
+      card.addEventListener('mousemove', handleMouseMove);
+    }
+
+    return () => {
+      if (isMobile) {
+        card.removeEventListener('touchmove', handleTouchMove);
+      } else {
+        card.removeEventListener('mousemove', handleMouseMove);
+      }
+    };
   }, [isHovered]);
 
   const handleMouseEnter = () => setIsHovered(true);
@@ -45,7 +80,7 @@ const BirthdayGreeting = () => {
   return (
     <div
       ref={cardRef}
-      className="relative max-w-lg p-8 mx-8 mx-auto my-6 text-center transition-all duration-300 shadow-lg bg-gradient-to-br from-pink-500 to-purple-600 rounded-3xl hover:shadow-2xl sm:max-w-md md:max-w-lg lg:max-w-xl sm:mx-6 md:mx-8"
+      className="relative max-w-lg p-8 mx-6 my-6 text-center transition-all duration-300 shadow-lg bg-gradient-to-br from-pink-500 to-purple-600 rounded-3xl hover:shadow-2xl sm:max-w-md md:max-w-lg lg:max-w-xl sm:mx-6 md:mx-8"
       style={{
         perspective: '1000px',
         transform: `rotateX(${tilt.x}deg) rotateY(${tilt.y}deg) scale(${isHovered ? 1.05 : 1})`,
@@ -53,6 +88,8 @@ const BirthdayGreeting = () => {
       }}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      onTouchStart={handleMouseEnter}
+      onTouchEnd={handleMouseLeave}
     >
       <div
         className="absolute inset-0 transition-opacity duration-300 rounded-3xl"
